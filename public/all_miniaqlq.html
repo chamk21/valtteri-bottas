@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Asthma For You</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <h1>View patient's submitted Mini Asthma Quality Life Questionnaire forms</h1>
+    <form class="searchAQLQ5">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for patient names..">
+    </form>
+    <table id="tbl_account_list" border="3" cellpadding="10" style="border-collapse:collapse;">
+        <tr>
+            <th>Score</th>
+            <th>Submitted At</th>
+        </tr>
+    </table>
+    <form>
+        <input type="submit" value="Search for a new patient">
+    </form>
+    <script src="/__/firebase/7.21.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-functions.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script>
+        function myFunction() {
+            const db = firebase.firestore();
+            var input = document.getElementById("myInput");
+            var filter = input.value;
+            const accountList = document.querySelector('#tbl_account_list');
+            db.collection('Forms').doc(filter).collection('Mini-Asthma-Quality-Life-Questionnaire').get().then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    let tr = document.createElement('tr');
+                    let td_score = document.createElement('td');
+                    let td_submitted_at = document.createElement('td');
+                    tr.setAttribute('data-id', doc.id);
+                    td_score.textContent = doc.data().Score;
+                    td_submitted_at.textContent = doc.data().Submitted_at.toDate();
+                    tr.appendChild(td_score);
+                    tr.appendChild(td_submitted_at);
+                    accountList.appendChild(tr);
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>
