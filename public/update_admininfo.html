@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All submited asthma attacks</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+</head>
+
+<body>
+    <h1>Update your personal info</h1>
+    <form onsubmit="myFunction()">
+        <label for="fname">Full Name:</label><br>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        var user = firebase.auth().currentUser;
+        const element = document.querySelector('form');
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+        });
+
+        function myFunction() {
+            var current_userid = user.userid
+            const db = firebase.firestore();
+            var admin_name = document.getElementById("fname").value;
+            var admin_email = document.getElementById("email").value;
+            db.collection('PersonalInfo3').doc(current_userid).set({
+                    'Name': admin_name,
+                    'Email': admin_email,
+                })
+                .then(function() {
+                    console.log("Data successfully updated!");
+                })
+                .catch(function(error) {
+                    console.error("Error writing document: ", error);
+                });
+        }
+    </script>
+</body>
+
+</html>

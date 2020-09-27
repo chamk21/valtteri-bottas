@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Asthma For You</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <H1>Remove patient treatments</H1>
+    <form class="deleteTreatments" onsubmit="myFunction()">
+        <input type="text" id="patientName" placeholder="Enter patient name"><br>
+        <input type="text" id="patientTreatment" placeholder="Enter treatment name"><br>
+        <input type="submit" value="Remove Treatment">
+    </form>
+    <script src="/__/firebase/7.21.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-functions.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script>
+        const element = document.querySelector('form');
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+        });
+
+        function myFunction() {
+            const db = firebase.firestore();
+            var input_name = document.getElementById("patientName").value;
+            var input_treatment = document.getElementById("patientTreatment").value;
+            db.collection("Treatments").doc(input_name).collection('Individual Treatments').doc(input_treatment).delete().then(function() {
+                console.log("Document successfully deleted!");
+            }).catch(function(error) {
+                console.error("Error removing document: ", error);
+            });
+        }
+    </script>
+</body>
+
+</html>

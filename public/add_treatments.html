@@ -43,7 +43,7 @@
             var Treatment_Device = document.getElementById("treatmentDevice").value;
             var Treatment_Dosage = document.getElementById("treatmentDosage").value;
             var Treatment_Duration = document.getElementById("treatmentDuration").value;
-            db.collection('Treatments').doc(patient_name).collection('Individual Treatments').add({
+            db.collection('Treatments').doc(patient_name).collection('Individual Treatments').doc(Treatment_Name).set({
                     'Treatment_name': Treatment_Name,
                     'Treatment_device': Treatment_Device,
                     'Treatment_dosage': Treatment_Dosage,
