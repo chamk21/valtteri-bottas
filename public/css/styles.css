@@ -6,15 +6,18 @@ body {
 }
 
 body,
+
 h1,
 h2,
 p,
 a,
+
 input {
     color: #555;
     font-family: Consolas, Arial;
     text-decoration: none;
 }
+
 
 ul {
     margin: 0;
@@ -23,6 +26,41 @@ ul {
 
 
 /* header styles */
+
+h1{
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: inline-flex;
+    background-color: #82b8f5;
+    border: 2px;
+    border-color: #868686;
+    border-radius: 0px 10px 10px 0px;
+    font-family: 'Times New Roman', Times, serif, Arial;
+    font-size: 25px;
+    font-weight: bold;
+    text-indent: 50px;
+    text-decoration: none;
+}
+
+h3{
+    display: inline-flex;
+    font-family: Arial, 'Times New Roman', Times, serif;
+    font-size: 19px;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 75px;
+}
+
+li{
+    list-style-type: none;
+    font-family: Arial, 'Times New Roman', Times, serif;
+    font-size: 15px;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 90px;
+}
+
 
 header {
     width: 100%;
@@ -35,13 +73,17 @@ header {
 
 header a {
     margin-left: 10px;
-    border-bottom: 2px solid #ffe100;
+    border-style: outset;
+    border-bottom: 2px solid #EDC500;
+    border-radius: 15%;
     padding: 4px;
     cursor: pointer;
 }
 
 header a:hover {
-    background: #ffe100;
+    background-color: #DCB300;
+    border: 2px solid #EDC500;
+    border-radius: 15%;
     color: black;
 }
 
