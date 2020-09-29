@@ -28,37 +28,42 @@ ul {
 /* header styles */
 
 h1{
+    padding-left: 30px;
     padding-right: 30px;
     padding-top: 5px;
     padding-bottom: 5px;
     display: inline-flex;
-    background-color: #82b8f5;
-    border: 2px;
-    border-color: #868686;
-    border-radius: 0px 10px 10px 0px;
-    font-family: 'Times New Roman', Times, serif, Arial;
+    font-family: 'Calibri', 'Times New Roman', Times, serif, Arial;
     font-size: 25px;
-    font-weight: bold;
-    text-indent: 50px;
+    font-weight: Bold;
+    text-indent: 30px;
     text-decoration: none;
+    color: black;
 }
 
 h3{
+    color: black;
+    padding-right: 30px;
     display: inline-flex;
     font-family: Arial, 'Times New Roman', Times, serif;
     font-size: 19px;
     text-align: left;
-    text-decoration: none;
+    text-decoration: underline;
     text-indent: 75px;
 }
 
 li{
+    color: #DCB300;
     list-style-type: none;
     font-family: Arial, 'Times New Roman', Times, serif;
     font-size: 15px;
     text-align: left;
     text-decoration: none;
     text-indent: 90px;
+}
+
+li a{
+    color: #0072dc;
 }
 
 
@@ -68,14 +73,16 @@ header {
     text-align: right;
     background: white;
     box-sizing: border-box;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 6px #0000001a;
 }
 
 header a {
+    font-family: Arial, 'Times New Roman', Times, serif;
     margin-left: 10px;
+    background-color: #DCB300;
     border-style: outset;
     border-bottom: 2px solid #EDC500;
-    border-radius: 15%;
+    border-radius: 8px 8px 8px 8px;
     padding: 4px;
     cursor: pointer;
 }
@@ -83,7 +90,7 @@ header a {
 header a:hover {
     background-color: #DCB300;
     border: 2px solid #EDC500;
-    border-radius: 15%;
+    border-radius: 8px 8px 8px 8px;
     color: black;
 }
 
