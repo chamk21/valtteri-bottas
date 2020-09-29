@@ -41,11 +41,12 @@ h1{
     color: black;
 }
 
-h3{
+h2{
     color: black;
     padding-right: 30px;
     display: inline-flex;
-    font-family: Arial, 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, Arial, serif,;
+    letter-spacing: 0.5px;
     font-size: 19px;
     text-align: left;
     text-decoration: underline;
@@ -56,6 +57,7 @@ li{
     color: #DCB300;
     list-style-type: none;
     font-family: Arial, 'Times New Roman', Times, serif;
+    font-weight: bold;
     font-size: 15px;
     text-align: left;
     text-decoration: none;
@@ -160,6 +162,10 @@ header a:hover {
 
 
 /* form element styles */
+
+label{
+    padding-left: 10px;
+}
 
 input {
     display: block;
