@@ -5,7 +5,14 @@ admin.initializeApp();
 exports.newUserSignUp = functions.auth.user().onCreate(user => {
     // for background triggers you must return a value/promise
     return admin.firestore().collection('PersonalInfo3').doc(user.uid).set({
-        email: user.email,
+        about_me: 'Hi I am a new user',
+        address: 'Enter your address',
+        age: 20,
+        dob: "DD/MM/YYYY",
+        fullname: 'Enter your fullname',
+        personalid: 'Enter your patient id',
+        phonenumber: 'Enter your phone number',
+        email: user.email
     });
 });
 
