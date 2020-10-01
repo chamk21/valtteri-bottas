@@ -6,7 +6,7 @@ body {
 }
 
 body,
-
+table,
 h1,
 h2,
 p,
@@ -28,29 +28,26 @@ ul {
 /* header styles */
 
 h1{
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    display: inline-flex;
+    padding-top: 1%;
+    padding-bottom: 1%;
     font-family: 'Calibri', 'Times New Roman', Times, serif, Arial;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: Bold;
-    text-indent: 30px;
+    text-indent: 10%;
     text-decoration: none;
     color: black;
 }
 
 h2{
     color: black;
-    padding-right: 30px;
-    display: inline-flex;
+    padding-top: 1%;
+    padding-bottom: 1%;
     font-family: 'Times New Roman', Times, Arial, serif,;
     letter-spacing: 0.5px;
     font-size: 19px;
     text-align: left;
     text-decoration: underline;
-    text-indent: 75px;
+    text-indent: 10%;
 }
 
 li{
@@ -61,7 +58,7 @@ li{
     font-size: 15px;
     text-align: left;
     text-decoration: none;
-    text-indent: 90px;
+    text-indent: 12%;
 }
 
 li a{
@@ -98,6 +95,21 @@ header a:hover {
 
 
 /* content styles */
+
+table{
+    margin: 1% 5% 1%;
+    padding: 1% 1.5% 1%;
+    width: 85%;
+    left: 5%;
+    right: 5%;
+}
+
+th{
+    color: black;
+    background-color: #335ed3;
+    font-family: Arial, 'Times New Roman', Times, serif;
+}
+
 
 .content {
     max-width: 800px;
@@ -164,15 +176,40 @@ header a:hover {
 /* form element styles */
 
 label{
-    padding-left: 10px;
+    padding-left: 5%;
+    font-weight: bold;
 }
 
-input {
-    display: block;
-    margin: 8px 0;
-    padding: 8px 2px;
+input[type=text]{
+    margin: 1% 5% 1%;
+    width: 80%;
+    left: 5%;
+    right: 5%;
+    padding: 1% 1.5% 1%;
     border-width: 0 0 2px 0;
-    width: 100%;
+    font-size: 90%;
+}
+
+input[type=text]:focus {
+    background-color: lightblue;
+}
+
+input[type=submit]{
+    font-weight: bold;
+    color: black;
+    background-color: #ffe100;
+    margin: 1% 5% 1%;
+    width: 85%;
+    left: 5%;
+    right: 5%;
+    padding: 1% 1.5% 1%;
+    border-width: 2px 2px 2px 2px;
+    font-size: 90%;
+}
+
+input[type=submit]:hover {
+    background-color: #ad9900;
+    border-width: 2.5px 2.5px 2.5px 2.5px;
 }
 
 button {
