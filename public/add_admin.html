@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Asthma For You</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav>
+        <a href='index.html' class="home">Home</a>
+    </nav>
+    <h1>Create an admin</h1>
+    <form class="addAdmin" onsubmit="myFunction()">
+        <label for="fname">Full Name of Admin:</label><br>
+        <input type="text" id="fname" name="fname"><br>
+
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email"><br>
+
+        <label for="password">Password:</label><br>
+        <input type="text" id="password"><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        const element = document.querySelector('form');
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+        });
+
+        function myFunction() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
+                    console.log('successfully created another user');
+                })
+                .catch(error => {
+                    console.log('There was an error creating an admin account');
+                })
+        }
+    </script>
+    <script src="/__/firebase/7.21.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-functions.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+</body>
+
+</html>

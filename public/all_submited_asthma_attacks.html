@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <nav>
+        <a href='index.html' class="home">Home</a>
+    </nav>
     <h1>Seach for all submitted asthma attacks</h1><br>
     <form class="searchAsthmaAttacks" onsubmit="myFunction()">
         <input type="text" id="myInput" placeholder="Search for patient names..">
@@ -22,6 +25,7 @@
             <th>Time of attack</th>
         </tr>
     </table>
+    <p id='totalresults'></p>
     <p id="error"></p>
     <form>
         <input type="submit" value="Search for a new patient">
@@ -39,6 +43,7 @@
         });
 
         function myFunction() {
+            var ncount = 0;
             const db = firebase.firestore();
             var input = document.getElementById("myInput");
             var filter = input.value;
@@ -54,6 +59,7 @@
             function renderAccount(doc) {
                 var patientPin = doc.data().pin;
                 if (patientPin == pin) {
+                    ncount = ncount + 1;
                     let tr = document.createElement('tr');
                     let td_action = document.createElement('td');
                     let td_time = document.createElement('td');
@@ -63,6 +69,7 @@
                     tr.appendChild(td_action);
                     tr.appendChild(td_time);
                     accountList.appendChild(tr);
+                    document.getElementById('totalresults').innerHTML = 'There were in total' + ' ' + ncount + ' ' + 'results';
                 } else {
                     document.getElementById('error').innerHTML = 'Either the pin you entered in wrong or the name of the patient is wrong';
                 }

@@ -13,36 +13,49 @@
 <body>
     <h1>Update your personal info</h1>
     <form onsubmit="myFunction()">
-        <label for="fname">Full Name:</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email"><br>
+        <label for="password">Old password:</label><br>
+        <input type="text" id="old_password"><br>
+
+        <label for="password">New password:</label><br>
+        <input type="text" id="new_password"><br>
+
+        <label for="email">Old email:</label><br>
+        <input type="text" id="email"><br>
+
         <input type="submit" value="Submit">
     </form>
     <script>
-        var user = firebase.auth().currentUser;
         const element = document.querySelector('form');
         element.addEventListener('submit', event => {
             event.preventDefault();
         });
 
         function myFunction() {
-            var current_userid = user.userid
-            const db = firebase.firestore();
-            var admin_name = document.getElementById("fname").value;
-            var admin_email = document.getElementById("email").value;
-            db.collection('PersonalInfo3').doc(current_userid).set({
-                    'Name': admin_name,
-                    'Email': admin_email,
+            const user = firebase.auth().currentUser;
+            var old_password = document.getElementById("old_password").value;
+            var new_password = document.getElementById("new_password").value;
+            var old_email = document.getElementById("email").value;
+            const credential = firebase.auth.EmailAuthProvider.credential(
+                old_email,
+                old_password
+            );
+            user.reauthenticateWithCredential(credential).then(function() {}).catch(function(error) {
+                console.log('another error occured')
+            });
+            user.updatePassword(new_password).then(res => {
+                    console.log('Successfully changed password')
                 })
-                .then(function() {
-                    console.log("Data successfully updated!");
+                .then(error => {
+                    console.log('error with updating password');
                 })
-                .catch(function(error) {
-                    console.error("Error writing document: ", error);
-                });
         }
     </script>
+    <script src="/__/firebase/7.21.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.7.0/firebase-functions.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
 </body>
 
 </html>
