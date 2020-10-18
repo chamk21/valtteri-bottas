@@ -26,6 +26,8 @@
 
         <input type="submit" value="Submit">
     </form>
+    <p id='adminadded'></p>
+    <p>To add another admin, please refresh the page</p>
     <script>
         const element = document.querySelector('form');
         element.addEventListener('submit', event => {
@@ -38,7 +40,7 @@
                 var email = document.getElementById('email').value;
                 var password = document.getElementById('password').value;
                 firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
-                        console.log('successfully created another user');
+                        document.getElementById('adminadded').innerHTML = 'Account created';
                     })
                     .catch(error => {
                         console.log('There was an error creating an admin account');

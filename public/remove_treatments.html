@@ -19,6 +19,8 @@
         <input type="text" id="patientTreatment" placeholder="Enter treatment name"><br>
         <input id='submitdatabutton' type="submit" value="Remove Treatment">
     </form>
+    <p id='treatmentremoved'></p>
+    <p>To remove more data, please refresh the page</p>
     <script src="/__/firebase/7.21.0/firebase-app.js"></script>
     <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
     <script src="/__/firebase/7.7.0/firebase-firestore.js"></script>
@@ -38,7 +40,7 @@
                 var input_name = document.getElementById("patientName").value;
                 var input_treatment = document.getElementById("patientTreatment").value;
                 db.collection("Treatments").doc(input_name).collection('Individual Treatments').doc(input_treatment).delete().then(function() {
-                    console.log("Document successfully deleted!");
+                    document.getElementById('treatmentremoved').innerHTML = 'Your data was removed';
                 }).catch(function(error) {
                     console.error("Error removing document: ", error);
                 });

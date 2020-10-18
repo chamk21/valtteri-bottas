@@ -29,6 +29,7 @@
         <input type="text" id="treatmentpatientpin"><br>
         <input id='submitdatabutton' type="submit" value="Submit">
         <p>To clear the data, simply refresh the page</p>
+        <p id='treatmentadded'></p>
     </form>
     <script src="/__/firebase/7.21.0/firebase-app.js"></script>
     <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
@@ -41,10 +42,6 @@
         element.addEventListener('submit', event => {
             event.preventDefault();
         });
-
-        function myFunction2() {
-            location.reload()
-        }
 
         function myFunction() {
             var user = firebase.auth().currentUser;
@@ -64,7 +61,7 @@
                         'Pin': Treatment_Pin
                     })
                     .then(function() {
-                        console.log("Document successfully written!");
+                        document.getElementById('treatmentadded').innerHTML = 'Your data was added to the database';
                     })
                     .catch(function(error) {
                         console.error("Error writing document: ", error);
