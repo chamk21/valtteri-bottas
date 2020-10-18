@@ -14,8 +14,10 @@
         <a href='index.html' class="home">Home</a>
     </nav>
     <h1>View patient's submitted ACQ-5 forms</h1>
-    <form class="searchACQ5">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for patient names..">
+    <form onsubmit="myFunction()">
+        <input type="text" id="myInput" placeholder="Search for patient name..">
+        <input type="text" id="myInput2" placeholder="Enter patient pin">
+        <input id='submitdatabutton' type="submit" value="Submit">
     </form>
     <table id="tbl_account_list" border="3" cellpadding="10" style="border-collapse:collapse;">
         <tr>
@@ -23,8 +25,9 @@
             <th>Submitted At</th>
         </tr>
     </table>
+    <p id="error"></p>
     <form>
-        <input type="submit" value="Search for a new patient">
+        <input id='searchnewpatientbutton' type="submit" value="Search for a new patient">
     </form>
     <script src="/__/firebase/7.21.0/firebase-app.js"></script>
     <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
@@ -33,24 +36,41 @@
     <!-- Initialize Firebase -->
     <script src="/__/firebase/init.js"></script>
     <script>
+        const element = document.querySelector('form');
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+        });
+
         function myFunction() {
+            var ncount = 0;
             const db = firebase.firestore();
             var input = document.getElementById("myInput");
             var filter = input.value;
+            var inputPin = document.getElementById("myInput2");
+            var pin = inputPin.value;
             const accountList = document.querySelector('#tbl_account_list');
             db.collection('Forms').doc(filter).collection('ACQ-5').get().then((snapshot) => {
                 snapshot.docs.forEach(doc => {
+                    renderAccount(doc);
+                })
+            })
+
+            function renderAccount(doc) {
+                var patientPin = doc.data().Pin;
+                if (patientPin == pin) {
                     let tr = document.createElement('tr');
                     let td_score = document.createElement('td');
                     let td_submitted_at = document.createElement('td');
                     tr.setAttribute('data-id', doc.id);
                     td_score.textContent = doc.data().Score;
-                    td_submitted_at.textContent = doc.data().Submitted_at;
+                    td_submitted_at.textContent = doc.data().Submitted_at.toDate().toString();
                     tr.appendChild(td_score);
                     tr.appendChild(td_submitted_at);
                     accountList.appendChild(tr);
-                })
-            })
+                } else {
+                    document.getElementById('error').innerHTML = 'Either the pin you entered in wrong or the name of the patient is wrong';
+                }
+            }
         }
     </script>
 </body>

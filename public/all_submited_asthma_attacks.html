@@ -17,7 +17,7 @@
     <form class="searchAsthmaAttacks" onsubmit="myFunction()">
         <input type="text" id="myInput" placeholder="Search for patient names..">
         <input type="text" id="myInput2" placeholder="Enter patient pin">
-        <input type="submit" value="Submit">
+        <input id='submitdatabutton' type="submit" value="Submit">
     </form>
     <table id="tbl_account_list" border="3" cellpadding="10" style="border-collapse:collapse;">
         <tr>
@@ -28,7 +28,7 @@
     <p id='totalresults'></p>
     <p id="error"></p>
     <form>
-        <input type="submit" value="Search for a new patient">
+        <input id='searchnewpatientbutton' type="submit" value="Search for a new patient">
     </form>
     <script src="/__/firebase/7.21.0/firebase-app.js"></script>
     <script src="/__/firebase/7.7.0/firebase-auth.js"></script>

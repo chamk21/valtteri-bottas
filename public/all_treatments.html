@@ -14,8 +14,10 @@
         <a href='index.html' class="home">Home</a>
     </nav>
     <h1>Current patient treatments</h1><br>
-    <form class="searchTreatments">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for patient names..">
+    <form class="searchTreatments" onsubmit="myFunction()">
+        <input type="text" id="myInput" placeholder="Search for patient name..">
+        <input type="text" id="myInput2" placeholder="Enter patient pin">
+        <input id='submitdatabutton' type="submit" value="Submit">
     </form>
     <table id="tbl_account_list" border="3" cellpadding="10" style="border-collapse:collapse;">
         <tr>
@@ -27,7 +29,7 @@
         </tr>
     </table>
     <form>
-        <input type="submit" value="Search for a new patient">
+        <input id='searchnewpatientbutton' type="submit" value="Search for a new patient">
     </form>
     <script src="/__/firebase/7.21.0/firebase-app.js"></script>
     <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
@@ -60,7 +62,7 @@
                 td_treatName.textContent = doc.data().Treatment_name;
                 td_device.textContent = doc.data().Treatment_device;
                 td_dosage.textContent = doc.data().Treatment_dosage;
-                td_duration.textContent = doc.data().Treatment_Duration;
+                td_duration.textContent = doc.data().Treatment_duration;
                 tr.appendChild(td_patientName);
                 tr.appendChild(td_treatName);
                 tr.appendChild(td_device);

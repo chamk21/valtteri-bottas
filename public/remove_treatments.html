@@ -10,11 +10,14 @@
 </head>
 
 <body>
+    <nav>
+        <a href='index.html' class="home">Home</a>
+    </nav>
     <H1>Remove patient treatments</H1>
     <form class="deleteTreatments" onsubmit="myFunction()">
         <input type="text" id="patientName" placeholder="Enter patient name"><br>
         <input type="text" id="patientTreatment" placeholder="Enter treatment name"><br>
-        <input type="submit" value="Remove Treatment">
+        <input id='submitdatabutton' type="submit" value="Remove Treatment">
     </form>
     <script src="/__/firebase/7.21.0/firebase-app.js"></script>
     <script src="/__/firebase/7.7.0/firebase-auth.js"></script>

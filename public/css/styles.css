@@ -5,7 +5,6 @@ body {
     background: #FFE8D1;
 }
 
-
 body,
 h1,
 h2,
@@ -60,19 +59,23 @@ header a:hover {
     text-align: center;
     padding-top: 0.5%;
     padding-bottom: 2%;
-    
 }
-.dashboard h3, li {
-padding-left: 2.5%;
+
+.dashboard h3,
+li {
+    padding-left: 2.5%;
 }
+
 .dashboard h3 {
     font-style: italic;
     text-decoration: underline;
 }
-.dashboard a:hover{
+
+.dashboard a:hover {
     text-decoration: underline;
 }
-.dashboard ul  li {
+
+.dashboard ul li {
     list-style-type: square;
 }
 
@@ -148,13 +151,14 @@ input {
     width: 100%;
     background-color: #fcc99f;
 }
-input::placeholder{
+
+input::placeholder {
     color: #005246;
 }
+
 input[type=submit] {
     color: #005246;
     font-weight: bolder;
-    text-decoration: underline;
     background-color: #fc7000;
 }
 
@@ -168,7 +172,6 @@ button {
     cursor: pointer;
     color: #005246;
 }
-
 
 
 /* auth styles */
@@ -197,4 +200,22 @@ button {
 
 .auth .modal.active {
     display: block;
+}
+
+nav {
+    color: red;
+    font-family: courier;
+    font-size: 160%;
+    width: 100%;
+    padding: 20px;
+    text-align: right;
+    background: #fc7000;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+#submitdatabutton,
+#searchnewpatientbutton {
+    font-size: 130%;
 }

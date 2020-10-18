@@ -25,7 +25,10 @@
         <input type="text" id="treatmentDosage" name="treatmentDosage"><br>
         <label for="treatmentDuration"> Treatment Duration:</label><br>
         <input type="text" id="treatmentDuration" name="treatmentDuration"><br>
-        <input type="submit" value="Submit">
+        <label> Patient Pin:</label><br>
+        <input type="text" id="treatmentpatientpin"><br>
+        <input id='submitdatabutton' type="submit" value="Submit">
+        <p>To clear the data, simply refresh the page</p>
     </form>
     <script src="/__/firebase/7.21.0/firebase-app.js"></script>
     <script src="/__/firebase/7.7.0/firebase-auth.js"></script>
@@ -39,6 +42,10 @@
             event.preventDefault();
         });
 
+        function myFunction2() {
+            location.reload()
+        }
+
         function myFunction() {
             const db = firebase.firestore();
             var patient_name = document.getElementById("fname").value;
@@ -46,11 +53,13 @@
             var Treatment_Device = document.getElementById("treatmentDevice").value;
             var Treatment_Dosage = document.getElementById("treatmentDosage").value;
             var Treatment_Duration = document.getElementById("treatmentDuration").value;
+            var Treatment_Pin = document.getElementById("treatmentpatientpin").value;
             db.collection('Treatments').doc(patient_name).collection('Individual Treatments').doc(Treatment_Name).set({
                     'Treatment_name': Treatment_Name,
                     'Treatment_device': Treatment_Device,
                     'Treatment_dosage': Treatment_Dosage,
-                    'Treatment_Duration': Treatment_Duration
+                    'Treatment_duration': Treatment_Duration,
+                    'Pin': Treatment_Pin
                 })
                 .then(function() {
                     console.log("Document successfully written!");
