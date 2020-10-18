@@ -32,14 +32,20 @@
         });
 
         function myFunction() {
-            const db = firebase.firestore();
-            var input_name = document.getElementById("patientName").value;
-            var input_treatment = document.getElementById("patientTreatment").value;
-            db.collection("Treatments").doc(input_name).collection('Individual Treatments').doc(input_treatment).delete().then(function() {
-                console.log("Document successfully deleted!");
-            }).catch(function(error) {
-                console.error("Error removing document: ", error);
-            });
+            var user = firebase.auth().currentUser;
+            if (user != null) {
+                const db = firebase.firestore();
+                var input_name = document.getElementById("patientName").value;
+                var input_treatment = document.getElementById("patientTreatment").value;
+                db.collection("Treatments").doc(input_name).collection('Individual Treatments').doc(input_treatment).delete().then(function() {
+                    console.log("Document successfully deleted!");
+                }).catch(function(error) {
+                    console.error("Error removing document: ", error);
+                });
+            } else {
+                return null;
+            }
+
         }
     </script>
 </body>

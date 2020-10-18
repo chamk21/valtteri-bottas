@@ -43,38 +43,44 @@
         });
 
         function myFunction() {
-            var ncount = 0;
-            const db = firebase.firestore();
-            var input = document.getElementById("myInput");
-            var filter = input.value;
-            var inputPin = document.getElementById("myInput2");
-            var pin = inputPin.value;
-            const accountList = document.querySelector('#tbl_account_list');
-            db.collection('Asthma attacks').doc(filter).collection('Record Asthma attacks').get().then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                    renderAccount(doc);
+            var user = firebase.auth().currentUser;
+            if (user != null) {
+                var ncount = 0;
+                const db = firebase.firestore();
+                var input = document.getElementById("myInput");
+                var filter = input.value;
+                var inputPin = document.getElementById("myInput2");
+                var pin = inputPin.value;
+                const accountList = document.querySelector('#tbl_account_list');
+                db.collection('Asthma attacks').doc(filter).collection('Record Asthma attacks').get().then((snapshot) => {
+                    snapshot.docs.forEach(doc => {
+                        renderAccount(doc);
+                    })
                 })
-            })
 
-            function renderAccount(doc) {
-                var patientPin = doc.data().pin;
-                if (patientPin == pin) {
-                    ncount = ncount + 1;
-                    let tr = document.createElement('tr');
-                    let td_action = document.createElement('td');
-                    let td_time = document.createElement('td');
-                    tr.setAttribute('data-id', doc.id);
-                    td_action.textContent = doc.data().action_taken;
-                    td_time.textContent = doc.data().time;
-                    tr.appendChild(td_action);
-                    tr.appendChild(td_time);
-                    accountList.appendChild(tr);
-                    document.getElementById('totalresults').innerHTML = 'There were in total' + ' ' + ncount + ' ' + 'results';
-                } else {
-                    document.getElementById('error').innerHTML = 'Either the pin you entered in wrong or the name of the patient is wrong';
+                function renderAccount(doc) {
+                    var patientPin = doc.data().pin;
+                    if (patientPin == pin) {
+                        ncount = ncount + 1;
+                        let tr = document.createElement('tr');
+                        let td_action = document.createElement('td');
+                        let td_time = document.createElement('td');
+                        tr.setAttribute('data-id', doc.id);
+                        td_action.textContent = doc.data().action_taken;
+                        td_time.textContent = doc.data().time;
+                        tr.appendChild(td_action);
+                        tr.appendChild(td_time);
+                        accountList.appendChild(tr);
+                        document.getElementById('totalresults').innerHTML = 'There were in total' + ' ' + ncount + ' ' + 'results';
+                    } else {
+                        document.getElementById('error').innerHTML = 'Either the pin you entered in wrong or the name of the patient is wrong';
+                    }
+
                 }
-
+            } else {
+                return null;
             }
+
         }
     </script>
 </body>

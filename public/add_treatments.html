@@ -47,26 +47,32 @@
         }
 
         function myFunction() {
-            const db = firebase.firestore();
-            var patient_name = document.getElementById("fname").value;
-            var Treatment_Name = document.getElementById("treatmentName").value;
-            var Treatment_Device = document.getElementById("treatmentDevice").value;
-            var Treatment_Dosage = document.getElementById("treatmentDosage").value;
-            var Treatment_Duration = document.getElementById("treatmentDuration").value;
-            var Treatment_Pin = document.getElementById("treatmentpatientpin").value;
-            db.collection('Treatments').doc(patient_name).collection('Individual Treatments').doc(Treatment_Name).set({
-                    'Treatment_name': Treatment_Name,
-                    'Treatment_device': Treatment_Device,
-                    'Treatment_dosage': Treatment_Dosage,
-                    'Treatment_duration': Treatment_Duration,
-                    'Pin': Treatment_Pin
-                })
-                .then(function() {
-                    console.log("Document successfully written!");
-                })
-                .catch(function(error) {
-                    console.error("Error writing document: ", error);
-                });
+            var user = firebase.auth().currentUser;
+            if (user != null) {
+                const db = firebase.firestore();
+                var patient_name = document.getElementById("fname").value;
+                var Treatment_Name = document.getElementById("treatmentName").value;
+                var Treatment_Device = document.getElementById("treatmentDevice").value;
+                var Treatment_Dosage = document.getElementById("treatmentDosage").value;
+                var Treatment_Duration = document.getElementById("treatmentDuration").value;
+                var Treatment_Pin = document.getElementById("treatmentpatientpin").value;
+                db.collection('Treatments').doc(patient_name).collection('Individual Treatments').doc(Treatment_Name).set({
+                        'Treatment_name': Treatment_Name,
+                        'Treatment_device': Treatment_Device,
+                        'Treatment_dosage': Treatment_Dosage,
+                        'Treatment_duration': Treatment_Duration,
+                        'Pin': Treatment_Pin
+                    })
+                    .then(function() {
+                        console.log("Document successfully written!");
+                    })
+                    .catch(function(error) {
+                        console.error("Error writing document: ", error);
+                    });
+            } else {
+                return null
+            }
+
         }
     </script>
 </body>
