@@ -14,20 +14,20 @@
         <a href='index.html' class="home">Home</a>
     </nav>
     <h1>Current patient treatments</h1><br>
-    <form class="searchTreatments" onsubmit="myFunction()">
+    <form onsubmit="myFunction()">
         <input type="text" id="myInput" placeholder="Search for patient name..">
         <input type="text" id="myInput2" placeholder="Enter patient pin">
         <input id='submitdatabutton' type="submit" value="Submit">
     </form>
     <table id="tbl_account_list" border="3" cellpadding="10" style="border-collapse:collapse;">
         <tr>
-            <th>Patient name</th>
             <th>Treatment name</th>
             <th>Treatment device</th>
             <th>Treatment dosage</th>
             <th>Treatment duration</th>
         </tr>
     </table>
+    <p id="error"></p>
     <form>
         <input id='searchnewpatientbutton' type="submit" value="Search for a new patient">
     </form>
@@ -38,12 +38,19 @@
     <!-- Initialize Firebase -->
     <script src="/__/firebase/init.js"></script>
     <script>
+        const element = document.querySelector('form');
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+        });
+
         function myFunction() {
             var user = firebase.auth().currentUser;
             if (user != null) {
                 const db = firebase.firestore();
                 var input = document.getElementById("myInput");
                 var filter = input.value;
+                var inputPin = document.getElementById("myInput2");
+                var pin = inputPin.value;
                 const accountList = document.querySelector('#tbl_account_list');
                 db.collection('Treatments').doc(filter).collection('Individual Treatments').get().then((snapshot) => {
                     snapshot.docs.forEach(doc => {
@@ -52,29 +59,31 @@
                 })
 
                 function renderAccount(doc) {
-                    let tr = document.createElement('tr');
-                    let td_patientName = document.createElement('td');
-                    let td_treatName = document.createElement('td');
-                    let td_device = document.createElement('td');
-                    let td_dosage = document.createElement('td');
-                    let td_duration = document.createElement('td');
-                    tr.setAttribute('data-id', doc.id);
-                    td_patientName.textContent = doc.data().Username;
-                    td_treatName.textContent = doc.data().Treatment_name;
-                    td_device.textContent = doc.data().Treatment_device;
-                    td_dosage.textContent = doc.data().Treatment_dosage;
-                    td_duration.textContent = doc.data().Treatment_duration;
-                    tr.appendChild(td_patientName);
-                    tr.appendChild(td_treatName);
-                    tr.appendChild(td_device);
-                    tr.appendChild(td_dosage);
-                    tr.appendChild(td_duration);
-                    accountList.appendChild(tr);
+                    var patientPin = doc.data().Pin;
+                    if (patientPin == pin) {
+                        let tr = document.createElement('tr');
+                        let td_treatName = document.createElement('td');
+                        let td_device = document.createElement('td');
+                        let td_dosage = document.createElement('td');
+                        let td_duration = document.createElement('td');
+                        tr.setAttribute('data-id', doc.id);
+                        td_treatName.textContent = doc.data().Treatment_name;
+                        td_device.textContent = doc.data().Treatment_device;
+                        td_dosage.textContent = doc.data().Treatment_dosage;
+                        td_duration.textContent = doc.data().Treatment_duration;
+                        tr.appendChild(td_treatName);
+                        tr.appendChild(td_device);
+                        tr.appendChild(td_dosage);
+                        tr.appendChild(td_duration);
+                        accountList.appendChild(tr);
+                    } else {
+                        document.getElementById('error').innerHTML = 'Either the pin you entered in wrong or the name of the patient is wrong';
+                    }
                 }
-            } else {
-                return null;
-            }
 
+            } else {
+                return null
+            }
         }
     </script>
 </body>

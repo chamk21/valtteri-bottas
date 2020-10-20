@@ -48,17 +48,17 @@
             if (user != null) {
                 const db = firebase.firestore();
                 var patient_name = document.getElementById("fname").value;
-                var Treatment_Name = document.getElementById("treatmentName").value;
-                var Treatment_Device = document.getElementById("treatmentDevice").value;
-                var Treatment_Dosage = document.getElementById("treatmentDosage").value;
-                var Treatment_Duration = document.getElementById("treatmentDuration").value;
-                var Treatment_Pin = document.getElementById("treatmentpatientpin").value;
-                db.collection('Treatments').doc(patient_name).collection('Individual Treatments').doc(Treatment_Name).set({
-                        'Treatment_name': Treatment_Name,
-                        'Treatment_device': Treatment_Device,
-                        'Treatment_dosage': Treatment_Dosage,
-                        'Treatment_duration': Treatment_Duration,
-                        'Pin': Treatment_Pin
+                var Treatment_name = document.getElementById("treatmentName").value;
+                var Treatment_device = document.getElementById("treatmentDevice").value;
+                var Treatment_dosage = document.getElementById("treatmentDosage").value;
+                var Treatment_duration = document.getElementById("treatmentDuration").value;
+                var Treatment_pin = document.getElementById("treatmentpatientpin").value;
+                db.collection('Treatments').doc(patient_name).collection('Individual Treatments').doc(Treatment_name).set({
+                        'Treatment_name': Treatment_name,
+                        'Treatment_device': Treatment_device,
+                        'Treatment_dosage': Treatment_dosage,
+                        'Treatment_duration': Treatment_duration,
+                        'Pin': Treatment_pin
                     })
                     .then(function() {
                         document.getElementById('treatmentadded').innerHTML = 'Your data was added to the database';
